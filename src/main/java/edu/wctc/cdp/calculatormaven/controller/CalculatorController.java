@@ -14,6 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import edu.wctc.cdp.calculatormaven.calculatorstrategy.Circle;
+import edu.wctc.cdp.calculatormaven.calculatorstrategy.Rectangle;
+import edu.wctc.cdp.calculatormaven.calculatorstrategy.Triangle;
+
 
 /**
  *
@@ -27,18 +31,38 @@ public class CalculatorController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {       
         response.setContentType("text/html;charset=UTF-8");
-                
+        Circle cir = new Circle();       
         CalculatorService service = new CalculatorService();
         
         String calcType = request.getParameter("calcType");
         
+        
         //Area of Rectangle
         String width = request.getParameter("width");
         String length = request.getParameter("length");
+        String radius = request.getParameter("radius");
+        String sideA = request.getParameter("sideA");
+        String sideB = request.getParameter("sideB");
         
-        Double area = service.calculateRectangle(width, length);
+        if (calcType.equals("rectangle")){
+            double areaRectangle = cir.calculateArea(length, width, "", "", "");
+            request.setAttribute("answer", areaRectangle);
+           
+        } 
+        else if (calcType.equals("circle")){
+            double areaCircle = cir.calculateArea("", "", radius, "", "");
+            request.setAttribute("answer", areaCircle);
+        }
+        else if (calcType.equals("triangle")){
+            double hypotenuse = cir.calculateArea("", "", "", sideA, sideB);
+            request.setAttribute("answer", hypotenuse);
+        }
         
-        request.setAttribute("answer", area);
+        
+        
+        //double area = service.calculateRectangle(width, length);
+      
+        
         
         RequestDispatcher view =
             request.getRequestDispatcher(RESULT_PAGE);
