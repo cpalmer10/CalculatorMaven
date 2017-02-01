@@ -29,8 +29,7 @@
         <h1>Length of Missing Side (Right Triangle)</h1>
         <form id="areaTriangle" name="areaTriangle" method="POST" action="CalculatorController?calcType=triangle">
             Side A: <input type="text" name="sideA" value="">
-            Side B: <input type="text" name="sideB" value="">
-            Side C: <input type="text" name="sideC" value="">
+            Side B: <input type="text" name="sideB" value="">           
             
              <input type="submit" name="submit" value="Submit">            
         </form>
