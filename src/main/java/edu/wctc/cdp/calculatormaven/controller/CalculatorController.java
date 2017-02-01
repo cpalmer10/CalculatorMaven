@@ -31,7 +31,9 @@ public class CalculatorController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {       
         response.setContentType("text/html;charset=UTF-8");
-        Circle cir = new Circle();       
+        Circle cir = new Circle();
+        Triangle tri = new Triangle();
+        Rectangle rect = new Rectangle();
         CalculatorService service = new CalculatorService();
         
         String calcType = request.getParameter("calcType");
@@ -45,16 +47,15 @@ public class CalculatorController extends HttpServlet {
         String sideB = request.getParameter("sideB");
         
         if (calcType.equals("rectangle")){
-            double areaRectangle = cir.calculateArea(length, width, "", "", "");
-            request.setAttribute("answer", areaRectangle);
-           
+            double areaRectangle = rect.calculateArea(length, width, "", "", "");
+            request.setAttribute("answer", areaRectangle);           
         } 
         else if (calcType.equals("circle")){
             double areaCircle = cir.calculateArea("", "", radius, "", "");
             request.setAttribute("answer", areaCircle);
         }
         else if (calcType.equals("triangle")){
-            double hypotenuse = cir.calculateArea("", "", "", sideA, sideB);
+            double hypotenuse = tri.calculateArea("", "", "", sideA, sideB);
             request.setAttribute("answer", hypotenuse);
         }
         
